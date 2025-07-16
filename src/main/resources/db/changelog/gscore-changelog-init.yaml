@@ -1,0 +1,22 @@
+databaseChangeLog:
+  #   changeSet:
+  #  - id : ddmmyyhhmm
+  #  - author: authorname
+  - changeSet:
+      id: 1207251251
+      author: manhuynh
+      changes:
+        - createTable:
+            tableName: exam_results
+            columns:
+              - column: { name: registration_number, type: BIGINT, constraints: { primaryKey: true } }
+              - column: { name: math, type: FLOAT }
+              - column: { name: literature, type: FLOAT }
+              - column: { name: foreign_language, type: FLOAT }
+              - column: { name: foreign_language_code, type: VARCHAR(10) }
+              - column: { name: physics, type: FLOAT }
+              - column: { name: chemistry, type: FLOAT }
+              - column: { name: biology, type: FLOAT }
+              - column: { name: history, type: FLOAT }
+              - column: { name: geography, type: FLOAT }
+              - column: { name: civic_education, type: FLOAT }

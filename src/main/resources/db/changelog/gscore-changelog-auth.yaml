@@ -1,0 +1,25 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1407250229
+      author: manhuynh
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: BIGSERIAL
+                  constraints:
+                    primaryKey: true
+              - column: { name: user_name, type: VARCHAR(255) }
+              - column: { name: password, type: VARCHAR(255) }
+
+  - changeSet:
+      id: 1407250230
+      author: manhuynh
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column: { name: user_name, value: admin }
+              - column: { name: password, value: $2a$12$OpjmlJSMXp3J9mCzuwZOtuO1gnxi7T7C0R9PQ6AeNZ2CejwYYyybO }
