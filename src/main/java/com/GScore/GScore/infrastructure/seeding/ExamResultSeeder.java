@@ -41,7 +41,7 @@ public class ExamResultSeeder {
         }
     }
 
-    @Transactional
+
     public void seed() {
         try {
             log.info("Starting ExamResult seeding process...");
@@ -63,25 +63,29 @@ public class ExamResultSeeder {
             int skippedCount = 0;
             List<ExamResult> batchResults = new ArrayList<>();
             final int BATCH_SIZE = 1000;
-            
+            log.info("Starting seeding process with batch size: {}", lines);
+            log.info("Total lines to process: {}", lines.size());
             // Bỏ qua dòng header (giả sử là dòng đầu tiên)
             for (int i = 1; i <= lines.size() - 1; i++) {
                 String line = lines.get(i);
                 String[] columns = line.split(",");
+                log.info("Processing line {}: {}", i, line);
                 if (columns.length < 11) {
                     skippedCount++;
+                    log.debug("Skipping line {}: {}", i, line);
                     continue;
                 }
 
                 Long registrationNumber = parseLong(columns[0]);
                 if (registrationNumber == null) {
                     skippedCount++;
+                    log.info("Skipping line {}: {}", i, line);
                     continue;
                 }
                 
                 // Kiểm tra xem record đã tồn tại chưa
                 if (examResultRepository.existsByRegistrationNumber(registrationNumber)) {
-                    log.debug("Skipping existing registration number: {}", registrationNumber);
+                    log.info("Skipping existing registration number: {}", registrationNumber);
                     skippedCount++;
                     continue; // Bỏ qua nếu đã tồn tại
                 }
@@ -100,21 +104,26 @@ public class ExamResultSeeder {
                         .foreignLanguageCode(columns[10])
                         .build();
 
-                batchResults.add(result);
+               // batchResults.add(result);
                 
                 // Lưu theo batch để tối ưu hiệu suất
-                if (batchResults.size() >= BATCH_SIZE) {
-                    examResultRepository.saveAll(batchResults);
-                    savedCount += batchResults.size();
-                    batchResults.clear();
-                    log.info("Processed {} records so far...", savedCount);
-                }
-            }
-            
-            // Lưu batch cuối cùng
-            if (!batchResults.isEmpty()) {
-                examResultRepository.saveAll(batchResults);
-                savedCount += batchResults.size();
+//                if (batchResults.size() >= BATCH_SIZE) {
+//                    examResultRepository.saveAll(batchResults);
+//                    savedCount += batchResults.size();
+//                    batchResults.clear();
+//                    log.info("Processed {} records so far...", savedCount);
+//                }
+//            }
+//
+//            // Lưu batch cuối cùng
+//            if (!batchResults.isEmpty()) {
+//                examResultRepository.saveAll(batchResults);
+//                savedCount += batchResults.size();
+//            }
+                examResultRepository.save(result);
+                log.info("Saved registration number: {}", registrationNumber);
+                savedCount++;
+
             }
             
             log.info("Seeding completed! Saved: {}, Skipped: {}", savedCount, skippedCount);
