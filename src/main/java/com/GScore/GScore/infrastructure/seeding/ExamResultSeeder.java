@@ -18,7 +18,7 @@ public class ExamResultSeeder {
 
     private final ExamResultRepository examResultRepository;
 
-    @Value("classpath:data/diem_thi_thpt_2024.csv")
+    @Value("classpath:data/diem_thi_thpt_2024.csv")  
     private Resource csvFile;
 
     @PostConstruct
