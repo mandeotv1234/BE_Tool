@@ -17,7 +17,7 @@ public class AdminController {
     @PostMapping("/seed")
     public ResponseEntity<String> triggerSeeding() {
         try {
-            examResultSeeder.seed();
+           // examResultSeeder.seed();
             return ResponseEntity.ok("Seeding completed successfully");
         } catch (Exception e) {
             return ResponseEntity.internalServerError()
