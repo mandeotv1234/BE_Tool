@@ -20,7 +20,7 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-@Profile({"development", "local", "production"})
+//@Profile({"development", "local", "production"})
 public class ExamResultSeeder implements ApplicationRunner {
 
     private final ExamResultRepository examResultRepository;
