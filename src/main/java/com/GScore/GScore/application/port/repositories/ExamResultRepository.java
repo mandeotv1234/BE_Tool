@@ -18,4 +18,6 @@ public interface ExamResultRepository {
     ScoreLevelReportResponse generateScoreLevelReport();
     SubjectScoreLevelChartResponse generateSubjectScoreLevelChart();
     int countTotalStudents();
+    boolean existsByRegistrationNumber(Long registrationNumber);
+
 }

@@ -122,4 +122,9 @@ public class ExamResultRepositoryImpl implements ExamResultRepository {
     public int countTotalStudents() {
         return (int) examResultJpaRepository.count();
     }
+
+    @Override
+    public boolean existsByRegistrationNumber(Long registrationNumber){
+        return examResultJpaRepository.existsById(registrationNumber);
+    }
 }

@@ -4,9 +4,7 @@ import com.GScore.GScore.application.port.repositories.ExamResultRepository;
 import com.GScore.GScore.application.usecases.response.ExamResultResponse;
 import com.GScore.GScore.domain.exceptions.ExamResultNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
 
-@Component
 @RequiredArgsConstructor
 public class GetExamResultByIdUseCase {
 
